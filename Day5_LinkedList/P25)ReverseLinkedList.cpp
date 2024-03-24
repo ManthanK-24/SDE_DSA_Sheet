@@ -1,4 +1,3 @@
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -11,8 +10,7 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        
+    ListNode* iterative(ListNode* head){
         if(!head)return head;
         
         ListNode* node = head;
@@ -26,5 +24,16 @@ public:
             node = tmp;
         }
         return prev;
+    }
+    ListNode* recursive(ListNode* head, ListNode* prev){
+        if(!head)return prev;
+        
+        ListNode* tmp = head->next;
+        head->next = prev;
+        return recursive(tmp,head);
+    }
+    ListNode* reverseList(ListNode* head) {
+        
+        return recursive(head, NULL);
     }
 };
