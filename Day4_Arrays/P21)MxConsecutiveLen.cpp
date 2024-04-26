@@ -1,4 +1,3 @@
-
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
@@ -16,6 +15,7 @@ public:
                 int cnt = 0;
                 while(present[x])
                 {
+                    checked[x]=1;
                     cnt++;
                     x++;
                 }
