@@ -1,43 +1,35 @@
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> threeSum(vector<int>& arr) {
         
-        vector<vector<int>> ans;
-        sort(nums.begin(),nums.end());
-        int n = nums.size();
-        for(int i=0;i<n;i++)
-        {
-            int j = i+1;
-            int k = n-1;
-            int sum = 0 - nums[i];
-            while(j<k)
-            {
-                
-                
-                if(nums[j]+nums[k]>sum)
-                {
-                    k--;
-                }
-                else if(nums[j]+nums[k]<sum)
-                {
-                    j++;
-                }
-                else
-                {
-                    // vector<int> tmp  ={nums[i],nums[j],nums[k]} ;
-                    vector<int> tmp;
-                    tmp.push_back(nums[i]);
-                    tmp.push_back(nums[j]);
-                    tmp.push_back(nums[k]);
-                    ans.push_back(tmp);
-                    
-                    while(j<k && nums[j]==tmp[1])j++;
-                    while(j<k && nums[k]==tmp[2])k--;
-                }
-                
+       vector<vector<int>> ans;
+    sort(arr.begin(), arr.end());
+    for (int i = 0; i < n; i++) {
+        //remove duplicates:
+        if (i != 0 && arr[i] == arr[i - 1]) continue;
+
+        //moving 2 pointers:
+        int j = i + 1;
+        int k = n - 1;
+        while (j < k) {
+            int sum = arr[i] + arr[j] + arr[k];
+            if (sum < 0) {
+                j++;
             }
-            while(i+1<n && nums[i]==nums[i+1])i++;
+            else if (sum > 0) {
+                k--;
+            }
+            else {
+                vector<int> temp = {arr[i], arr[j], arr[k]};
+                ans.push_back(temp);
+                j++;
+                k--;
+                //skip the duplicates:
+                while (j < k && arr[j] == arr[j - 1]) j++;
+                while (j < k && arr[k] == arr[k + 1]) k--;
+            }
         }
-        return ans;
+    }
+    return ans;
     }
 };
